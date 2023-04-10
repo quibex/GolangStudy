@@ -1,0 +1,40 @@
+package srack_int
+
+type Stack struct{
+	buf []int
+}
+
+func (st *Stack) Init() {
+	st.buf = make([]int, 5)
+	fmt.Println(len(st.buf))
+}
+
+func (st *Stack) Size() int {
+	return int(len(st.buf))
+}
+
+func (st *Stack) Pop() (val int, err bool) {
+	if len(st.buf) == 0 {
+		err = true
+		return
+	}
+	val = st.buf[st.Size()-1]
+	st.buf = st.buf[0:st.Size()-1]
+	err = false
+	return 
+}
+
+func (st *Stack) Back() (val int, err bool) {
+	if len(st.buf) == 0 {
+		err = true
+		return
+	}
+	val = st.buf[st.Size()-1]
+	err = false
+	return 
+}
+
+func (st *Stack) Push(val int) {
+	st.buf = append(st.buf, val)
+	return
+}
