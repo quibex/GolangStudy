@@ -2,6 +2,7 @@ package main
 
 import (
 	"RestAPI/internal/user"
+	"RestAPI/pkg/logging"
 	"github.com/julienschmidt/httprouter"
 	"log"
 	"net"
@@ -10,11 +11,12 @@ import (
 )
 
 func main() {
-	log.Println("create router")
+	logger := logging.GetLogger()
+	logger.Info("create router")
 	router := httprouter.New()
 
-	log.Println("register user handler")
-	handler := user.NewHandler()
+	logger.Info("register user handler")
+	handler := user.NewHandler(logger)
 	handler.Register(router)
 	start(router)
 
